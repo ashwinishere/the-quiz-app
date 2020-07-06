@@ -1,24 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
 class Square extends React.Component {
+
   render() {
     return (
-      <button className="square">
-        {/* TODO */}
+      <button onClick={() => this.props.onClick()} className="square">
+        {this.props.value}
       </button>
     );
   }
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: new Array(9).fill(null)
+    }
+  }
+  handleClick(i) {
+const squares = this.state.squares.slice();
+squares[i] = 'X';
+this.setState({squares});
+  }
   renderSquare(i) {
-    return <Square />;
+    return <Square onClick={() => this.handleClick(i)} value={this.state.squares[i]} />;
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = "Next player: X";
 
     return (
       <div>
@@ -61,8 +73,4 @@ class Game extends React.Component {
 
 // ========================================
 
-ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
-);
-
+ReactDOM.render(<Game />, document.getElementById("root"));
