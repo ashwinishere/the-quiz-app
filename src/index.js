@@ -78,6 +78,7 @@ return(
     }
     return (
       <div className="game">
+      <Timer/>
         <div className="game-board">
           <Board onClick={(i) => this.handleClick(i)} squares={current.squares} />
         </div>
@@ -109,5 +110,16 @@ function calculateWinner(squares) {
   return null;
 }
 // ========================================
+
+const Timer = () => {
+  return (
+<div  className="countdown">
+  <div className="countdown-number">1</div>
+  <svg>
+    <circle r="18" cx="20" cy="20"></circle>
+  </svg>
+</div>
+  );
+}
 
 ReactDOM.render(<Game />, document.getElementById("root"));
